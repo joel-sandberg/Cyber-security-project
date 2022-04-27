@@ -16,7 +16,18 @@ def transfer(sender, receiver, amount):
                 acc2.balance += amount
                 acc1.save()
                 acc2.save()
-                
+
+# def loginPageView(request):
+  # if request.method == 'POST':
+          # name = request.POST('name')
+          # passw = request.POST('pass')
+          # user = authenticate(request, username=name, password=passw)
+          # if user is not None:
+                  # login(request, user)
+                  # return redirect('/home/')
+          # else:
+                 # return()
+  
 def loginPageView(request):
 
         if request.method == 'GET':
