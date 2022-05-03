@@ -3,7 +3,9 @@ from django.shortcuts import redirect
 from django.template import loader
 from django.db import transaction
 from .models import Account
-
+# from django.contrib.auth.models import User
+# from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import permission_required
 
 # Create your views here.
 @transaction.atomic
@@ -38,16 +40,16 @@ def loginPageView(request):
                 if name == 'guest' and passw == 'guest':
                         return redirect('/guest/')
         return render(request, 'pages/login.html')
-
+#@login_required
 def guestPageView(request):
         accounts = Account.objects.all()
         context = {'accounts': accounts}
         return render(request, 'pages/guest.html', context)
-
+#@login_required
 def errorPageView(request):
         return render(request, 'pages/error.html')
 
-
+#@permission_required
 def homePageView(request):
         if request.method == 'POST':
                 sender = request.POST.get('from')
