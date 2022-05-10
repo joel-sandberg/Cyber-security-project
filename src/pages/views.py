@@ -3,7 +3,9 @@ from django.shortcuts import redirect
 from django.template import loader
 from django.db import transaction
 from .models import Account
-from django.contrib.auth import password_validation
+import sqlite3
+from sqlite3 import Error
+# from django.contrib.auth import password_validation
 # from django.contrib.auth.models import User
 # from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.decorators import permission_required
@@ -35,7 +37,25 @@ def transfer(sender, receiver, amount):
                  # return()
   
 def loginPageView(request):
+        accounts = []
+        con = sqlite3.connect('db.sqlite3')
+        cur = con.cursor()
+        cur.execute(''' CREATE TABLE IF NOT EXISTS SENSDAT
+                (FIND INT PRIMARY KEY     NOT NULL,
+                NAME           TEXT    NOT NULL,
+                SENS            TEXT     NOT NULL);
+                ''')
+        cur.execute("INSERT INTO SENSDAT VALUES (1, 'Bill','owns a car')")
+        cur.execute("INSERT INTO SENSDAT VALUES (2, 'Julius','has children')")
+        cur.execute("INSERT INTO SENSDAT VALUES (3, 'Gandhi','cheats on his wife')")
 
+        if request.method == 'POST':
+                s = request.POST.get('search')
+                c = cur.execute('SELECT NAME FROM SENSDAT WHERE NAME = "' + s + '"')
+                for row in c:
+                        accounts.append(row)
+
+        
         if request.method == 'GET':
                 name = request.GET.get('name')
                 passw = request.GET.get('pass')
@@ -45,7 +65,8 @@ def loginPageView(request):
                         return redirect('/home/')
                 if name == 'guest' and passw == 'guest':
                         return redirect('/guest/')
-        return render(request, 'pages/login.html')
+        context = {'accounts': accounts}
+        return render(request, 'pages/login.html', context)
 #@login_required
 def guestPageView(request):
         accounts = Account.objects.all()
@@ -66,3 +87,4 @@ def homePageView(request):
         accounts = Account.objects.all()
         context = {'accounts': accounts}
         return render(request, 'pages/index.html', context)
+

@@ -7,8 +7,21 @@
     <body>
 		<h1>Login</h1>
 
-        
-
+        <form method="POST">
+		 {% csrf_token %}
+		<table>
+            <tr>
+                <th style="text-align:center">Search from our client list!</th>
+				<input type="text" name="search" placeholder="Search..">
+				<input type="submit" value="Search!"/>
+            </tr>
+			{% for account in accounts %}
+			<tr>
+				<td style="text-align:center">{{account}}</td>
+			</tr>	
+			{% endfor %}
+        </table>
+		</form>
 
         <form method="GET">
 			

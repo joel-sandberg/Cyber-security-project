@@ -67,6 +67,9 @@ CREATE TABLE IF NOT EXISTS "pages_account" ("id" integer NOT NULL PRIMARY KEY AU
 INSERT INTO pages_account VALUES(1,'Elvis',666);
 INSERT INTO pages_account VALUES(2,'Koodari-Make',69);
 INSERT INTO pages_account VALUES(3,'Tarzan',420);
+INSERT INTO pages_account VALUES(4,'Elmo',6);
+INSERT INTO pages_account VALUES(5,'Petteri',6900);
+INSERT INTO pages_account VALUES(6,'Wappu',46);
 CREATE TABLE IF NOT EXISTS "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "username" varchar(150) NOT NULL UNIQUE, "last_name" varchar(150) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "first_name" varchar(150) NOT NULL);
 DELETE FROM sqlite_sequence;
 INSERT INTO sqlite_sequence VALUES('django_migrations',19);
