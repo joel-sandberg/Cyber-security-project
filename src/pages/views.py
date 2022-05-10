@@ -52,6 +52,7 @@ def loginPageView(request):
         if request.method == 'POST':
                 s = request.POST.get('search')
                 c = cur.execute('SELECT NAME FROM SENSDAT WHERE NAME = "' + s + '"')
+##                c = cur.execute('SELECT NAME FROM SENSDAT WHERE NAME = "?"', s)
                 for row in c:
                         accounts.append(row)
 
