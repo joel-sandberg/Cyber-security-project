@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.template import loader
 from django.db import transaction
 from .models import Account
+from django.contrib.auth import password_validation
 # from django.contrib.auth.models import User
 # from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.decorators import permission_required
@@ -23,6 +24,9 @@ def transfer(sender, receiver, amount):
   # if request.method == 'POST':
           # name = request.POST('name')
           # passw = request.POST('pass')
+          #if passw is not None:
+                #        password_validation.validate_password(passw, password_validators=None)
+
           # user = authenticate(request, username=name, password=passw)
           # if user is not None:
                   # login(request, user)
@@ -35,6 +39,8 @@ def loginPageView(request):
         if request.method == 'GET':
                 name = request.GET.get('name')
                 passw = request.GET.get('pass')
+                #if passw is not None:
+                #        password_validation.validate_password(passw, password_validators=None)
                 if name == 'admin' and passw == 'admin':
                         return redirect('/home/')
                 if name == 'guest' and passw == 'guest':
